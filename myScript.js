@@ -174,7 +174,7 @@ function setBeltSteps(value){
         shirt_div.classList.add("none");
 
         //set T-shirt to Nein
-        //shirt_div.children[2].children[0].checked = true;
+        shirt_div.children[2].children[0].checked = true;
 
 
         if(value == "Erwachsen")
