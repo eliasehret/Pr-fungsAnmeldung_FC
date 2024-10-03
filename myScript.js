@@ -48,7 +48,7 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
 
             belt: event.target.gürtelwahl.value,
             wkupassAbgegeben: event.target.wkupass-abgegeben.value,
-            Tshirt: event.target.shirtwahl.value,
+            //Tshirt: event.target.shirtwahl.value,
             
             photo: base64String,
             mimeType: mimeType,
