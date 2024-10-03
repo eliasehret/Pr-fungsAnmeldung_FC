@@ -80,6 +80,44 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
     reader.readAsDataURL(fileInput);
 });
 
+
+
+
+function alterEingabe(input){
+    console.log(input);
+
+    var alter = getAlter(input);
+     
+    if(alter < 10){
+        setAltersgruppe("Budo Kids");
+    }
+    else if(alter >= 10 && alter < 16){
+        setAltersgruppe("Jugendlich");
+    }
+    else if(alter >= 16 && alter < 18){
+        setAltersgruppe("Jugendlich 2");
+    }
+    else if(alter >= 18){
+        setAltersgruppe("Erwachsen");
+    }
+}
+
+function getAlter(input){
+    var geburtstag = new Date(input);
+    var heute = new Date();
+
+    var alter = heute.getFullYear() - geburtstag.getFullYear();
+    var monatsDifferenz = heute.getMonth() - geburtstag.getMonth();
+
+    // Überprüfen, ob der Geburtstag in diesem Jahr noch nicht war
+    if (monatsDifferenz < 0 || (monatsDifferenz === 0 && heute.getDate() < geburtstag.getDate())) {
+        alter--;
+    }
+
+    return alter;
+}
+
+
 function setAltersgruppe(Altersgruppe){
     if(Altersgruppe == "Budo Kids"){
         setBeltSteps("Budo Kids");
@@ -122,6 +160,7 @@ function setBeltSteps(value){
         sportart_selector.disabled = true;
 
         shirt_div.classList.remove("none");
+        shirt_div.children[2].children[0].checked = true;
     }
     else 
     {
@@ -161,38 +200,4 @@ function setBeltSteps(value){
         }
     }
 
-}
-
-function alterEingabe(input){
-    console.log(input);
-
-    var alter = getAlter(input);
-     
-    if(alter < 10){
-        setAltersgruppe("Budo Kids");
-    }
-    else if(alter >= 10 && alter < 16){
-        setAltersgruppe("Jugendlich");
-    }
-    else if(alter >= 16 && alter < 18){
-        setAltersgruppe("Jugendlich 2");
-    }
-    else if(alter >= 18){
-        setAltersgruppe("Erwachsen");
-    }
-}
-
-function getAlter(input){
-    var geburtstag = new Date(input);
-    var heute = new Date();
-
-    var alter = heute.getFullYear() - geburtstag.getFullYear();
-    var monatsDifferenz = heute.getMonth() - geburtstag.getMonth();
-
-    // Überprüfen, ob der Geburtstag in diesem Jahr noch nicht war
-    if (monatsDifferenz < 0 || (monatsDifferenz === 0 && heute.getDate() < geburtstag.getDate())) {
-        alter--;
-    }
-
-    return alter;
 }
