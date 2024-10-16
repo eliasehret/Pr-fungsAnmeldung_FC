@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="myScript.js" defer></script>
+    <title>Prüfungs Anmeldung</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Anmeldung Gürtelprüfung</h1>
+        </header>
+        <section class="InputArea">
+
+            <!-- action="https://formsubmit.co/elias.ehret@fightclub-freiburg.de" -->
+            <form id="anmeldungsFormular" method="POST" enctype="multipart/form-data">
+                
+                <!-- Vorname -->
+                <div class="inputfield">
+                    <p class="inputTitle">Vorname Prüfling <a style="color: rgb(255, 183, 0)">*</a></p>
+                    <input name="firstName" placeholder="Vorname Prüfling" required>
+                </div>
+
+                <!-- Nachname -->
+                <div class="inputfield">
+                    <p class="inputTitle">Nachname Prüfling <a style="color: rgb(255, 183, 0)">*</a></p>
+                    <input name="lastName" placeholder="Nachname Prüfling" required>
+                </div>
+
+                <!-- Alter -->
+                <div class="inputfield">
+                    <p class="inputTitle">Geburtsdatum Prüfling <a style="color: rgb(255, 183, 0)">*</a></p>
+                    <input type="date" name="birthday" placeholder="Alter" required onchange="alterEingabe(this.value)">
+                </div>
+
+                 <!-- Sportart -->
+                 <div class="inputfield">
+                    <p class="inputTitle">Sportart<a style="color: rgb(255, 183, 0)">*</a></p>
+
+                    <select id="sportart_selector" name="category" class="graduierung-selection">
+                        <option value="Kickboxen">Kickboxen</option>
+                        <option value="Jiu-Jitsu">Jiu-Jitsu</option>
+                    </select>
+                </div>
+
+                <!-- Graduierung -->
+                <div class="inputfield">
+                    <p class="inputTitle">Graduierung<a style="color: rgb(255, 183, 0)">*</a></p>
+
+                    <select id="graduierung_selector" name="graduation" class="graduierung-selection">
+                        <option value="Weiß">Weiß</option>
+                        <option value="Gelb">Gelb</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Grün">Grün</option>
+                        <option value="Blau">Blau</option>
+                    </select>
+                </div>
+
+                <!-- Gürtel -->
+                <div class="inputfield gürtel-checkbox">
+                    <p class="inputTitle">Ich will einen Gürtel<a style="color: rgb(255, 183, 0)">*</a></p>
+                    
+                    <div>
+                        <input type="radio" name="gürtelwahl" value="Ja" required>
+                        <labl>Ja (Kostet 5€)</labl>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="gürtelwahl" value="Nein" required>
+                        <labl>Nein</labl>
+                    </div>
+                </div>
+
+                <!-- WKU-Pass -->
+                <div class="inputfield gürtel-checkbox">
+                    <p class="inputTitle">WKU-Pass abgegeben<a style="color: rgb(255, 183, 0)">*</a></p>
+                    
+                    <div>
+                        <input type="radio" name="wkupassAbgegeben" value="Ja" required>
+                        <labl>Ja</labl>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="wkupassAbgegeben" value="Nein" required>
+                        <labl>Nein</labl>
+                    </div>
+                </div>
+
+                <!-- T-Shirt -->
+                <div id="T-Shirt_div" class="inputfield gürtel-checkbox" style="margin: 25px 0px 25px 0px;">
+                    <p class="inputTitle">Prüfungsshirt</p>
+                    
+                    <p style="margin: -5px 0px 10px 0px; font-size: 12px">Die Ameise (BuKi) trägt einen Gürtel mit der Gürtelfarbe,<br> die Ihr Kind erreicht hat! <a href="Images/BudoKids_Prüfungsshirts_beispiel.JPG">Hier ein Beispielbild</a></p>
+
+                    <div>
+                        <input type="radio" name="shirtwahl" value="Ja" onchange="shirtSizeDisplay(this.value)">
+                        <labl>Ja (Kostet 20€)</labl>
+                    </div>
+
+                    <!-- Shirt Größen -->
+                    <div>
+                        <div class="none" id="shirtSizeDisplay">
+                            <div style="display: flex; flex-direction: column; margin: 0px 0px 0px 25px">
+
+                                <select id="shirtSize_selector" name="shirtSize" style="height: 25px; width: 110px; margin: 0px 0px 10px 0px">
+                                    <option value="116">Größe wählen</option>
+                                    <option value="116">116</option>
+                                    <option value="128">128</option>
+                                    <option value="134">134</option>
+                                    <option value="140">140</option>
+                                    <option value="152">152</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="shirtwahl" value="Nein" onchange="shirtSizeDisplay(this.value)">
+                        <labl>Nein</labl>
+                    </div>
+                </div>
+
+                <!-- Foto -->
+                <div class="inputfield imagePreview">
+                    <p style="margin-left: -20px" class="inputTitle">Foto</p>
+                    <p style="font-size: 13px; margin: 5px 0px 10px -25px">Das Foto wird auf die Urkunde gedruckt.</p>
+                    <input type="file" id="imageUpload" name="photo" accept="image/*" onchange="previewImage(event)">
+
+                    <img id="imagePreview" src="Images/Default_PB.jpg" alt="Bild Vorschau">
+                </div>
+
+                <!-- Einverständnis -->
+                <div id="Einverständnis" class="inputfield gürtel-checkbox" style="margin-top: 20px">
+                    <p class="inputTitle">Einverständnis<a style="color: rgb(255, 183, 0)">*</a></p>
+                    
+                    <div>
+                        <input type="checkbox" name="consent" value="hat den Bedingungen zugestimmt" required>
+                        <labl style="font-size: 10px">
+                            Ich habe den folgenden Text gelesen und verstanden: <br> 
+                            Die Anmeldung an die Prüfung ist verbindlich, <br>
+                            falls ich aus gesundheitlichen oder persönlichen Gründen nicht <br>
+                            teilnehmen kann, sichere ich zu, dass ich mich vorab <br>
+                            SCHRIFTLICH von der Prüfung abmelden werde. <br>
+                        </labl>
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <div class="inputfield">
+                    <button class="submitButton" type="submit">Anmeldung Abschicken</button>
+                </div>
+
+            </form>
+
+        </section>
+    </main>
+</body>
+</html>
