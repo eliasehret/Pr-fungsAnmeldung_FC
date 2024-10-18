@@ -1,3 +1,9 @@
+var curretAgegroup = "";
+
+var belt_selector = document.getElementById("graduierung_selector");
+
+
+
 function previewImage(event) {
     const file = event.target.files[0]; // Das hochgeladene Bild
     const preview = document.getElementById('imagePreview'); // Das Bild-Element für die Vorschau
@@ -28,15 +34,17 @@ function previewImage(event) {
 document.getElementById("anmeldungsFormular").addEventListener("submit", async function(event){
     event.preventDefault();
 
+    if(belt_selector.value == "") {
+        alert("Bitte wähle eine Graduierung aus.");
+        return;
+    }
+
+
     const fileInput = event.target.photo.files[0];
     const reader = new FileReader();
 
-    reader.onloadend = async function() {
-        // Datei in Base64 konvertieren
-        const base64String = reader.result.split(',')[1]; 
-        // MIME-Typ der Datei erfassen
-        const mimeType = fileInput.type;
-        
+    if(fileInput == null){
+
         // Daten für den JSON-Body
         const data = {
             firstName: event.target.firstName.value,
@@ -50,14 +58,25 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             wkupassAbgegeben: event.target.wkupassAbgegeben.value,
             Tshirt: event.target.shirtSize.value,
             
-            photo: base64String,
-            mimeType: mimeType,
+            photo: "",
+            mimeType: "",
 
             consent: event.target.consent.value
         };
 
+        var url = "";
+
+        if(curretAgegroup == "") {
+            alert("Eingabe Fehler: Alter muss angegeben sein!");
+            return;
+        }
+
+        if(curretAgegroup == "Budo Kids") url = "https://prod-233.westeurope.logic.azure.com:443/workflows/cf48efe7b6304432bb520e6b1f4f3336/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nNc4VXuK7HwiKYMtbpWSPiDADIibt6IttC502iTBEFs";
+        else url = "https://prod-243.westeurope.logic.azure.com:443/workflows/5f72913b3067460980817306b9cdeea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Q1UNbolQLiVBshQ2owvGWS9UXB7q7kKK8ql7l-2Pe6E";
+
+
         try {
-            const response = await fetch("https://prod-243.westeurope.logic.azure.com:443/workflows/5f72913b3067460980817306b9cdeea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Q1UNbolQLiVBshQ2owvGWS9UXB7q7kKK8ql7l-2Pe6E", {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -79,14 +98,85 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
         } catch (error) {
             alert("Fehler bei der Übermittlung: " + error.message);
         }
-    };
+    }
+    else 
+    {
+        reader.onloadend = async function() {
+            // Datei in Base64 konvertieren
+            const base64String = reader.result.split(',')[1]; 
+            // MIME-Typ der Datei erfassen
+            const mimeType = fileInput.type;
+            
+            // Daten für den JSON-Body
+            const data = {
+                firstName: event.target.firstName.value,
+                lastName: event.target.lastName.value,
+    
+                birthday: event.target.birthday.value,
+                category: event.target.category.value,
+                graduation: event.target.graduation.value,
+    
+                belt: event.target.gürtelwahl.value,
+                wkupassAbgegeben: event.target.wkupassAbgegeben.value,
+                Tshirt: event.target.shirtSize.value,
+                
+                photo: base64String,
+                mimeType: mimeType,
+    
+                consent: event.target.consent.value
+            };
+    
+            var url = "";
+    
+            if(curretAgegroup == "") {
+                alert("Eingabe Fehler: Alter muss angegeben sein!");
+                return;
+            }
+    
+            if(curretAgegroup == "Budo Kids") url = "https://prod-233.westeurope.logic.azure.com:443/workflows/cf48efe7b6304432bb520e6b1f4f3336/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nNc4VXuK7HwiKYMtbpWSPiDADIibt6IttC502iTBEFs";
+            else url = "https://prod-243.westeurope.logic.azure.com:443/workflows/5f72913b3067460980817306b9cdeea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Q1UNbolQLiVBshQ2owvGWS9UXB7q7kKK8ql7l-2Pe6E";
+    
+    
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+    
+                if(response.ok) {
+                    alert("Formular erfolgreich übermittelt!");
+    
+                    // Clear the form here
+                    document.getElementById("anmeldungsFormular").reset();
+    
+                    location.reload();
+                } else {
+                    const errorData = await response.json();
+                    alert("Fehler bei der Übermittlung: " + JSON.stringify(errorData));
+                }
+            } catch (error) {
+                alert("Fehler bei der Übermittlung: " + error.message);
+            }
+        };
+    
+        // Lese die Datei als Data-URL (Base64)
+        reader.readAsDataURL(fileInput);
+    }
 
-    // Lese die Datei als Data-URL (Base64)
-    reader.readAsDataURL(fileInput);
+    
 });
 
 
+window.onload = function(){
+    callAlterseingabeWithCurrentValue();
+}
 
+function callAlterseingabeWithCurrentValue(){
+    alterEingabe(document.getElementById("birthday").value);
+}
 
 function alterEingabe(input){
     console.log(input);
@@ -124,6 +214,9 @@ function getAlter(input){
 
 
 function setAltersgruppe(Altersgruppe){
+
+    curretAgegroup = Altersgruppe;
+
     if(Altersgruppe == "Budo Kids"){
         setBeltSteps("Budo Kids");
     }
@@ -138,22 +231,30 @@ function setAltersgruppe(Altersgruppe){
     }
 }
 
-function setBeltSteps(value){
-    console.log(value);
+function setBeltSteps(altersgruppe){
+    console.log(altersgruppe);
 
-    var belt_selector = document.getElementById("graduierung_selector");
+    
     var sportart_selector = document.getElementById("sportart_selector");
     var shirt_div = document.getElementById("T-Shirt_div");
 
     belt_selector.options.length = 0;
 
-    if(value == "Budo Kids")
+    if(altersgruppe == "Budo Kids")
     {
+        //create empty selection slot befor the others
+        const newOption = document.createElement('option');
+        newOption.value = "";
+        newOption.disabled = true;
+        newOption.selected = true;
+        newOption.textContent = "Bitte auswählen";
+        belt_selector.insertBefore(newOption, belt_selector.firstChild);
+
         belt_selector.add(new Option("Weiß-Gelb"));
         belt_selector.add(new Option("Gelb"));
         belt_selector.add(new Option("Gelb-Orange"));
         belt_selector.add(new Option("Orange"));
-	belt_selector.add(new Option("Orange-Grün"));
+	    belt_selector.add(new Option("Orange-Grün"));
         belt_selector.add(new Option("Grün"));
 
         //delete all options with the value "Budo Kids"
@@ -184,30 +285,48 @@ function setBeltSteps(value){
         shirt_div.children[2].children[0].checked = true;
 
 
-        if(value == "Erwachsen")
+        if(altersgruppe == "Erwachsen")
         {
             belt_selector.add(new Option("Gelb"));
             belt_selector.add(new Option("Orange"));
             belt_selector.add(new Option("Grün"));
             belt_selector.add(new Option("Blau"));
         }
-        else if(value == "Jugendlich")
-        {
-            belt_selector.add(new Option("Gelb"));
-            belt_selector.add(new Option("Orange"));
-            belt_selector.add(new Option("Grün 1"));
-            belt_selector.add(new Option("Grün 2"));
-            belt_selector.add(new Option("Blau 1"));
-            belt_selector.add(new Option("Blau 2"));
+        if(sportart_selector.value == "Kickboxen"){
+            
+            if(altersgruppe == "Jugendlich")
+            {
+                belt_selector.add(new Option("Gelb"));
+                belt_selector.add(new Option("Orange"));
+                belt_selector.add(new Option("Grün 1"));
+                belt_selector.add(new Option("Grün 2"));
+                belt_selector.add(new Option("Blau 1"));
+                belt_selector.add(new Option("Blau 2"));
+            }
+            else if(altersgruppe == "Jugendlich 2")
+            {
+                belt_selector.add(new Option("Gelb"));
+                belt_selector.add(new Option("Orange"));
+                belt_selector.add(new Option("Grün"));
+                belt_selector.add(new Option("Blau 1"));
+                belt_selector.add(new Option("Blau 2"));
+            }
         }
-        else if(value == "Jugendlich 2")
+        else if(sportart_selector.value == "Jiu Jitsu")
         {
             belt_selector.add(new Option("Gelb"));
             belt_selector.add(new Option("Orange"));
             belt_selector.add(new Option("Grün"));
-            belt_selector.add(new Option("Blau 1"));
-            belt_selector.add(new Option("Blau 2"));
+            belt_selector.add(new Option("Blau"));
         }
+
+        //create empty selection slot befor the others
+        const newOption = document.createElement('option');
+        newOption.value = "";
+        newOption.disabled = true;
+        newOption.selected = true;
+        newOption.textContent = "Bitte auswählen";
+        belt_selector.insertBefore(newOption, belt_selector.firstChild);
     }
 
 }
