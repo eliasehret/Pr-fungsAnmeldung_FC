@@ -32,16 +32,16 @@
                 <!-- Alter -->
                 <div class="inputfield">
                     <p class="inputTitle">Geburtsdatum Prüfling <a style="color: rgb(255, 183, 0)">*</a></p>
-                    <input type="date" name="birthday" placeholder="Alter" required onchange="alterEingabe(this.value)">
+                    <input type="date" id="birthday" name="birthday" placeholder="Alter" required onchange="alterEingabe(this.value)">
                 </div>
 
                  <!-- Sportart -->
                  <div class="inputfield">
                     <p class="inputTitle">Sportart<a style="color: rgb(255, 183, 0)">*</a></p>
 
-                    <select id="sportart_selector" name="category" class="graduierung-selection">
+                    <select id="sportart_selector" name="category" class="graduierung-selection" onchange="callAlterseingabeWithCurrentValue()">
                         <option value="Kickboxen">Kickboxen</option>
-                        <option value="Jiu-Jitsu">Jiu-Jitsu</option>
+                        <option value="Jiu Jitsu">Jiu-Jitsu</option>
                     </select>
                 </div>
 
@@ -50,6 +50,7 @@
                     <p class="inputTitle">Graduierung<a style="color: rgb(255, 183, 0)">*</a></p>
 
                     <select id="graduierung_selector" name="graduation" class="graduierung-selection">
+                        <option value="" disabled selected>Bitte auswählen</option>
                         <option value="Weiß">Weiß</option>
                         <option value="Gelb">Gelb</option>
                         <option value="Orange">Orange</option>
