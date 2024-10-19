@@ -10,7 +10,7 @@
 <body>
     <main>
         <header>
-            <h1>Anmeldung Gürtelprüfung</h1>
+            <h1>Anmeldung <br> <img src="Images/Fightclub Logo.png" height="40px" style="margin: 0px 0px -10px 0px"> Gürtelprüfung <img src="Images/Fightclub Logo.png" height="40px" style="margin: 0px 0px -10px 0px"></h1>
         </header>
         <section class="InputArea">
 
@@ -49,9 +49,8 @@
                 <div class="inputfield">
                     <p class="inputTitle">Graduierung<a style="color: rgb(255, 183, 0)">*</a></p>
 
-                    <select id="graduierung_selector" name="graduation" class="graduierung-selection">
+                    <select id="graduierung_selector" name="graduation" class="graduierung-selection" onchange="selectGraduation(this)">
                         <option value="" disabled selected>Bitte auswählen</option>
-                        <option value="Weiß">Weiß</option>
                         <option value="Gelb">Gelb</option>
                         <option value="Orange">Orange</option>
                         <option value="Grün">Grün</option>
@@ -75,16 +74,16 @@
                 </div>
 
                 <!-- WKU-Pass -->
-                <div class="inputfield gürtel-checkbox">
+                <div id="wkupassAbgegeben_div" class="inputfield gürtel-checkbox">
                     <p class="inputTitle">WKU-Pass abgegeben<a style="color: rgb(255, 183, 0)">*</a></p>
                     
                     <div>
-                        <input type="radio" name="wkupassAbgegeben" value="Ja" required>
+                        <input type="radio" name="wkupassAbgegeben" value="Ja">
                         <labl>Ja</labl>
                     </div>
 
                     <div>
-                        <input type="radio" name="wkupassAbgegeben" value="Nein" required>
+                        <input type="radio" name="wkupassAbgegeben" value="Nein">
                         <labl>Nein</labl>
                     </div>
                 </div>
@@ -102,11 +101,11 @@
 
                     <!-- Shirt Größen -->
                     <div>
-                        <div class="" id="shirtSizeDisplay">
+                        <div class="none" id="shirtSizeDisplay">
                             <div style="display: flex; flex-direction: column; margin: 0px 0px 0px 25px">
 
                                 <select id="shirtSize_selector" name="shirtSize" style="height: 25px; width: 110px; margin: 0px 0px 10px 0px">
-                                    <option value="116">Größe wählen</option>
+                                    <option value="" disabled selected>Größe auswählen</option>
                                     <option value="116">116</option>
                                     <option value="128">128</option>
                                     <option value="134">134</option>
@@ -144,6 +143,7 @@
                             falls ich aus gesundheitlichen oder persönlichen Gründen nicht <br>
                             teilnehmen kann, sichere ich zu, dass ich mich vorab <br>
                             SCHRIFTLICH von der Prüfung abmelden werde. <br>
+                            <!-- <strong>Die Prüfungskosten betragen <geb id="Gebühr">xx</geb>€ und müssen Vorort, in Bar, bezahlt werden.</strong> -->
                         </labl>
                     </div>
                 </div>
