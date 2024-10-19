@@ -1,6 +1,7 @@
 var curretAgegroup = "";
 
 var belt_selector = document.getElementById("graduierung_selector");
+var wkupassAbgegeben_div = document.getElementById("wkupassAbgegeben_div");
 
 
 
@@ -38,10 +39,16 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
         alert("Bitte wähle eine Graduierung aus.");
         return;
     }
+    if(!wkupassAbgegeben_div.classList.contains("none") && event.target.wkupassAbgegeben.value == "") {
+        alert("Hast du deinen WKU Pass schon abgegeben ?");
+        return;
+    }
 
 
     const fileInput = event.target.photo.files[0];
     const reader = new FileReader();
+
+    console.log(event.target.gürtelwahl.selectedIndex);
 
     if(fileInput == null){
 
@@ -55,8 +62,10 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             graduation: event.target.graduation.value,
 
             belt: event.target.gürtelwahl.value,
-            wkupassAbgegeben: event.target.wkupassAbgegeben.value,
-            Tshirt: event.target.shirtSize.value,
+
+            wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
+
+            Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
             
             photo: "",
             mimeType: "",
@@ -117,14 +126,17 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
                 graduation: event.target.graduation.value,
     
                 belt: event.target.gürtelwahl.value,
-                wkupassAbgegeben: event.target.wkupassAbgegeben.value,
-                Tshirt: event.target.shirtSize.value,
+    
+                wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
+    
+                Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
                 
-                photo: base64String,
-                mimeType: mimeType,
+                photo: "",
+                mimeType: "",
     
                 consent: event.target.consent.value
             };
+    
     
             var url = "";
     
@@ -175,7 +187,17 @@ window.onload = function(){
 }
 
 function callAlterseingabeWithCurrentValue(){
+    //sogrt dafür, dass richtige Beltstufen zur auswahl dastehen
     alterEingabe(document.getElementById("birthday").value);
+    
+    //checked ob bei shirtwahl ja oder nein angekreuzt ist und dis- / enabled shirtsize selector 
+    var shirtwahl_toggles = document.getElementsByName("shirtwahl");
+    for (let i = 0; i < shirtwahl_toggles.length; i++) {
+        if(shirtwahl_toggles[i].checked){
+            shirtSizeDisplay(shirtwahl_toggles[i].value);
+        }
+    }
+    
 }
 
 function alterEingabe(input){
@@ -233,13 +255,12 @@ function setAltersgruppe(Altersgruppe){
 
 function setBeltSteps(altersgruppe){
     console.log(altersgruppe);
-
     
     var sportart_selector = document.getElementById("sportart_selector");
     var shirt_div = document.getElementById("T-Shirt_div");
 
     belt_selector.options.length = 0;
-
+    
     if(altersgruppe == "Budo Kids")
     {
         //create empty selection slot befor the others
@@ -292,33 +313,37 @@ function setBeltSteps(altersgruppe){
             belt_selector.add(new Option("Grün"));
             belt_selector.add(new Option("Blau"));
         }
-        if(sportart_selector.value == "Kickboxen"){
+        else 
+        {
+            if(sportart_selector.value == "Kickboxen"){
             
-            if(altersgruppe == "Jugendlich")
-            {
-                belt_selector.add(new Option("Gelb"));
-                belt_selector.add(new Option("Orange"));
-                belt_selector.add(new Option("Grün 1"));
-                belt_selector.add(new Option("Grün 2"));
-                belt_selector.add(new Option("Blau 1"));
-                belt_selector.add(new Option("Blau 2"));
+                if(altersgruppe == "Jugendlich")
+                {
+                    belt_selector.add(new Option("Gelb"));
+                    belt_selector.add(new Option("Orange"));
+                    belt_selector.add(new Option("Grün 1"));
+                    belt_selector.add(new Option("Grün 2"));
+                    belt_selector.add(new Option("Blau 1"));
+                    belt_selector.add(new Option("Blau 2"));
+                }
+                else if(altersgruppe == "Jugendlich 2")
+                {
+                    belt_selector.add(new Option("Gelb"));
+                    belt_selector.add(new Option("Orange"));
+                    belt_selector.add(new Option("Grün"));
+                    belt_selector.add(new Option("Blau 1"));
+                    belt_selector.add(new Option("Blau 2"));
+                }
             }
-            else if(altersgruppe == "Jugendlich 2")
+            else if(sportart_selector.value == "Jiu Jitsu")
             {
                 belt_selector.add(new Option("Gelb"));
                 belt_selector.add(new Option("Orange"));
                 belt_selector.add(new Option("Grün"));
-                belt_selector.add(new Option("Blau 1"));
-                belt_selector.add(new Option("Blau 2"));
+                belt_selector.add(new Option("Blau"));
             }
         }
-        else if(sportart_selector.value == "Jiu Jitsu")
-        {
-            belt_selector.add(new Option("Gelb"));
-            belt_selector.add(new Option("Orange"));
-            belt_selector.add(new Option("Grün"));
-            belt_selector.add(new Option("Blau"));
-        }
+        
 
         //create empty selection slot befor the others
         const newOption = document.createElement('option');
@@ -329,6 +354,28 @@ function setBeltSteps(altersgruppe){
         belt_selector.insertBefore(newOption, belt_selector.firstChild);
     }
 
+}
+
+function selectGraduation(selected_graduation){
+
+    //enable / disable WKU Pass Abgabe feld
+    if(selected_graduation.selectedIndex == 1)
+    {
+        wkupassAbgegeben_div.classList.add("none");
+    }
+    else
+    {
+        wkupassAbgegeben_div.classList.remove("none");
+    }
+    /*
+    var gebührFeld = document.getElementById("Gebühr");
+
+    //Calculate cost
+    if(selected_graduation.value == "Gelb") gebührFeld.innerHTML = "20";
+    else if(selected_graduation.value == "Orange") gebührFeld.innerHTML = "25";
+    else if(selected_graduation.value == "Grün") gebührFeld.innerHTML = "30";
+    else if(selected_graduation.value == "Blau") gebührFeld.innerHTML = "35";
+    */
 }
 
 function shirtSizeDisplay(input){
