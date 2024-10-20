@@ -376,9 +376,11 @@ function selectGraduation(selected_graduation){
     else if(selected_graduation.value == "Gelb-Orange") gebührFeld.innerHTML = "25";
     else if(selected_graduation.value == "Orange") gebührFeld.innerHTML = "30";
     else if(selected_graduation.value == "Orange-Grün") gebührFeld.innerHTML = "30";
-    else if(selected_graduation.value == "Grün") gebührFeld.innerHTML = "35";
+    else if(selected_graduation.value == "Grün" || selected_graduation.value == "Grün 1") gebührFeld.innerHTML = "35";
+    else if(selected_graduation.value == "Grün 2") gebührFeld.innerHTML = "0";
     else if(selected_graduation.value == "Grün-Blau") gebührFeld.innerHTML = "35";
-    else if(selected_graduation.value == "Blau") gebührFeld.innerHTML = "40";
+    else if(selected_graduation.value == "Blau" || selected_graduation.value == "Blau 1") gebührFeld.innerHTML = "40";
+    else if(selected_graduation.value == "Blau 2") gebührFeld.innerHTML = "0";
     
 }
 
