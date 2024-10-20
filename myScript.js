@@ -367,15 +367,19 @@ function selectGraduation(selected_graduation){
     {
         wkupassAbgegeben_div.classList.remove("none");
     }
-    /*
+    
     var gebührFeld = document.getElementById("Gebühr");
 
     //Calculate cost
-    if(selected_graduation.value == "Gelb") gebührFeld.innerHTML = "20";
-    else if(selected_graduation.value == "Orange") gebührFeld.innerHTML = "25";
-    else if(selected_graduation.value == "Grün") gebührFeld.innerHTML = "30";
-    else if(selected_graduation.value == "Blau") gebührFeld.innerHTML = "35";
-    */
+    if(selected_graduation.value == "Weiß-Gelb") gebührFeld.innerHTML = "20";
+    else if(selected_graduation.value == "Gelb") gebührFeld.innerHTML = "25";
+    else if(selected_graduation.value == "Gelb-Orange") gebührFeld.innerHTML = "25";
+    else if(selected_graduation.value == "Orange") gebührFeld.innerHTML = "30";
+    else if(selected_graduation.value == "Orange-Grün") gebührFeld.innerHTML = "30";
+    else if(selected_graduation.value == "Grün") gebührFeld.innerHTML = "35";
+    else if(selected_graduation.value == "Grün-Blau") gebührFeld.innerHTML = "35";
+    else if(selected_graduation.value == "Blau") gebührFeld.innerHTML = "40";
+    
 }
 
 function shirtSizeDisplay(input){
