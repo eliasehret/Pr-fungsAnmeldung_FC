@@ -114,7 +114,7 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             // Datei in Base64 konvertieren
             const base64String = reader.result.split(',')[1]; 
             // MIME-Typ der Datei erfassen
-            const mimeType = base64StringfileInput.type;
+            const mimeType = fileInput.type;
             
             // Daten für den JSON-Body
             const data = {
