@@ -114,7 +114,7 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             // Datei in Base64 konvertieren
             const base64String = reader.result.split(',')[1]; 
             // MIME-Typ der Datei erfassen
-            const mimeType = fileInput.type;
+            const mimeType = base64StringfileInput.type;
             
             // Daten für den JSON-Body
             const data = {
@@ -131,8 +131,8 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
     
                 Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
                 
-                photo: "",
-                mimeType: "",
+                photo: base64String,
+                mimeType: mimeType,
     
                 consent: event.target.consent.value
             };
