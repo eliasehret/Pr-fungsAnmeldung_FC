@@ -2,6 +2,7 @@ var curretAgegroup = "";
 
 var belt_selector = document.getElementById("graduierung_selector");
 var wkupassAbgegeben_div = document.getElementById("wkupassAbgegeben_div");
+var tshirt_size_slector = document.getElementById("shirtSize_selector");
 
 
 
@@ -41,6 +42,10 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
     }
     if(!wkupassAbgegeben_div.classList.contains("none") && event.target.wkupassAbgegeben.value == "") {
         alert("Hast du deinen WKU Pass schon abgegeben ?");
+        return;
+    }
+    if(tshirt_size_slector.selectedIndex == 0 && event.target.shirtwahl.value == "Ja"){
+        alert("Bitte wähle eine T-Shirt größe aus.");
         return;
     }
 
@@ -275,7 +280,7 @@ function setBeltSteps(altersgruppe){
         belt_selector.add(new Option("Gelb"));
         belt_selector.add(new Option("Gelb-Orange"));
         belt_selector.add(new Option("Orange"));
-	    belt_selector.add(new Option("Orange-Grün"));
+	belt_selector.add(new Option("Orange-Grün"));
         belt_selector.add(new Option("Grün"));
 
         //delete all options with the value "Budo Kids"
