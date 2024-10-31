@@ -4,6 +4,7 @@ var belt_selector = document.getElementById("graduierung_selector");
 var wkupassAbgegeben_div = document.getElementById("wkupassAbgegeben_div");
 var tshirt_size_slector = document.getElementById("shirtSize_selector");
 
+const email = "";
 
 
 function previewImage(event) {
@@ -71,7 +72,9 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
 
             Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
-            
+
+	    email: email,
+		
             photo: "",
             mimeType: "",
 
@@ -135,7 +138,9 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
                 wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
     
                 Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
-                
+
+		email: email,
+		    
                 photo: base64String,
                 mimeType: mimeType,
     
@@ -194,6 +199,10 @@ window.onload = function(){
 function callAlterseingabeWithCurrentValue(){
     //sogrt dafür, dass richtige Beltstufen zur auswahl dastehen
     alterEingabe(document.getElementById("birthday").value);
+
+    //Email Parameter aus der URL übernommen
+    const urlParams = new URLSearchParams(window.location.search);
+    email = urlParams.get('email');  // Hier wird der 'email'-Parameter abgerufen
     
     //checked ob bei shirtwahl ja oder nein angekreuzt ist und dis- / enabled shirtsize selector 
     var shirtwahl_toggles = document.getElementsByName("shirtwahl");
