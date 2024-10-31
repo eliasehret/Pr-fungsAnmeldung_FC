@@ -197,7 +197,7 @@ window.onload = function(){
 
     //Email Parameter aus der URL übernommen
     const urlParams = new URLSearchParams(window.location.search);
-    email = urlParams.get('email') == null ? urlParams.get('email'): "No Email found!";  // Hier wird der 'email'-Parameter abgerufen
+    email = urlParams.get('email') != null ? urlParams.get('email'): "No Email found!";  // Hier wird der 'email'-Parameter abgerufen
     console.log(email);
 }
 
