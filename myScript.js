@@ -194,17 +194,17 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
 
 window.onload = function(){
     callAlterseingabeWithCurrentValue();
+
+    //Email Parameter aus der URL übernommen
+    const urlParams = new URLSearchParams(window.location.search);
+    email = urlParams.get('email') == null ? urlParams.get('email') == null: "No Email found!";  // Hier wird der 'email'-Parameter abgerufen
+    console.log(email);
 }
 
 function callAlterseingabeWithCurrentValue(){
     //sogrt dafür, dass richtige Beltstufen zur auswahl dastehen
     alterEingabe(document.getElementById("birthday").value);
 
-    //Email Parameter aus der URL übernommen
-    const urlParams = new URLSearchParams(window.location.search);
-    email = urlParams.get('email') == null ? urlParams.get('email') == null: "No Email found!";  // Hier wird der 'email'-Parameter abgerufen
-    console.log(email);
-    
     //checked ob bei shirtwahl ja oder nein angekreuzt ist und dis- / enabled shirtsize selector 
     var shirtwahl_toggles = document.getElementsByName("shirtwahl");
     for (let i = 0; i < shirtwahl_toggles.length; i++) {
