@@ -203,6 +203,7 @@ function callAlterseingabeWithCurrentValue(){
     //Email Parameter aus der URL übernommen
     const urlParams = new URLSearchParams(window.location.search);
     email = urlParams.get('email');  // Hier wird der 'email'-Parameter abgerufen
+    console.log(email);
     
     //checked ob bei shirtwahl ja oder nein angekreuzt ist und dis- / enabled shirtsize selector 
     var shirtwahl_toggles = document.getElementsByName("shirtwahl");
