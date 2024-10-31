@@ -4,7 +4,7 @@ var belt_selector = document.getElementById("graduierung_selector");
 var wkupassAbgegeben_div = document.getElementById("wkupassAbgegeben_div");
 var tshirt_size_slector = document.getElementById("shirtSize_selector");
 
-const email = "";
+var email = "";
 
 
 function previewImage(event) {
