@@ -197,10 +197,16 @@ window.onload = function(){
 
     //Email Parameter aus der URL übernommen
     const urlParams = new URLSearchParams(window.location.search);
-    email = urlParams.get('email') == null ? "No Email found!" : urlParams.get('email'); // Hier wird der 'email'-Parameter abgerufen
-    console.log(email);
+    if(urlParams.get('email') == null)
+    {
+        email = "elias.ehret@fightclub-freiburg.de";
+        console.log("No Email found!");
+    }
+    else{
+        email = urlParams.get("email");
+        console.log(email);
+    }
 }
-
 function callAlterseingabeWithCurrentValue(){
     //sogrt dafür, dass richtige Beltstufen zur auswahl dastehen
     alterEingabe(document.getElementById("birthday").value);
