@@ -200,7 +200,7 @@ window.onload = function(){
     if(urlParams.get('email') == null)
     {
         email = "elias.ehret@fightclub-freiburg.de";
-        console.log("No Email found!");
+        console.log("No Email found! An error message will be send to 'elias.ehret@fightclub-freiburg.de'");
     }
     else{
         email = urlParams.get("email");
