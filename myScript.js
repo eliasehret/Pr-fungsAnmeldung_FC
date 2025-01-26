@@ -71,9 +71,16 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
 
             wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
 
+            standort: event.target.standort.value,
+
+            telefonnummer: event.target.telefonnummer.value,
+            adresse: event.target.adresse.value,
+            platz: event.target.platz.value,
+            ort: event.target.ort.value,
+
             Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
 
-	    email: email,
+            email: event.target.email.value,
 		
             photo: "",
             mimeType: "",
@@ -136,10 +143,17 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
                 belt: event.target.gürtelwahl.value,
     
                 wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
-    
+
+                standort: event.target.standort.value,
+
+                telefon: event.target.telefonnummer.value,
+                adresse: event.target.adresse.value,
+                platz: event.target.platz.value,
+                ort: event.target.ort.value,
+
                 Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
 
-		email: email,
+		        email: event.target.email.value,
 		    
                 photo: base64String,
                 mimeType: mimeType,
@@ -414,5 +428,16 @@ function shirtSizeDisplay(input){
         shirtSizeDisplay.classList.remove("none");
     }else{
         shirtSizeDisplay.classList.add("none");
+    }
+}
+
+function changeWKUPassAbgegebenValue(value){
+    const newPassSection = document.getElementById("NewPassSection");
+
+    if(value == "Nein"){
+        newPassSection.classList.remove("none");
+    }
+    else{
+        newPassSection.classList.add("none");
     }
 }
