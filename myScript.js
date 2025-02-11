@@ -170,7 +170,7 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             }
     
             if(curretAgegroup == "Budo Kids") url = "https://prod-233.westeurope.logic.azure.com:443/workflows/cf48efe7b6304432bb520e6b1f4f3336/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nNc4VXuK7HwiKYMtbpWSPiDADIibt6IttC502iTBEFs";
-            else url = "https://prod-243.westeurope.logic.azure.com:443/workflows/5f72913b3067460980817306b9cdeea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Q1UNbolQLiVBshQ2owvGWS9UXB7q7kKK8ql7l-2Pe6E";
+            else url = "https://prod-41.westeurope.logic.azure.com:443/workflows/b893d6f927674005b07ad52158417578/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=o-k6wknDrG9_ZJq5PSH_cQLpQ3w6DPmu35gwxvKqh9g";
     
     
             try {
