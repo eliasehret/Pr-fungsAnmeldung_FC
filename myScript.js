@@ -60,17 +60,18 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
 
         // Daten für den JSON-Body
         const data = {
-            firstName: event.target.firstName.value,
-            lastName: event.target.lastName.value,
+            vorname: event.target.firstName.value,
+            nachname: event.target.lastName.value,
 
-            birthday: event.target.birthday.value,
-            category: event.target.category.value,
-            graduation: event.target.graduation.value,
+            geburtstag: event.target.birthday.value,
+            sportart: event.target.category.value,
+            graduierung: event.target.graduation.value,
 
-            belt: event.target.gürtelwahl.value,
+            will_gürtel: event.target.gürtelwahl.value,
 
-            wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
-
+            //wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
+	    besitzt_wku_pass: event.target.wkupassAbgegeben.value,
+		
             standort: event.target.standort.value,
 
             telefonnummer: event.target.telefonnummer.value,
@@ -85,7 +86,7 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             photo: "",
             mimeType: "",
 
-            consent: event.target.consent.value
+            einverständniss: event.target.consent.value
         };
 
         var url = "";
@@ -133,32 +134,33 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
             
             // Daten für den JSON-Body
             const data = {
-                firstName: event.target.firstName.value,
-                lastName: event.target.lastName.value,
-    
-                birthday: event.target.birthday.value,
-                category: event.target.category.value,
-                graduation: event.target.graduation.value,
-    
-                belt: event.target.gürtelwahl.value,
-    
-                wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
+	    	vorname: event.target.firstName.value,
+         	nachname: event.target.lastName.value,
 
-                standort: event.target.standort.value,
+            	geburtstag: event.target.birthday.value,
+            	sportart: event.target.category.value,
+            	graduierung: event.target.graduation.value,
 
-                telefon: event.target.telefonnummer.value,
-                adresse: event.target.adresse.value,
-                platz: event.target.platz.value,
-                ort: event.target.ort.value,
+            	will_gürtel: event.target.gürtelwahl.value,
 
-                Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
+            	//wkupassAbgegeben: event.target.graduation.value == "Weiß-Gelb" && event.target.category.value == "Budo Kids" ? "Erste Prüfung" : event.target.graduation.value == "Gelb" ? "Erste Prüfung" : event.target.wkupassAbgegeben.value,
+	    	besitzt_wku_pass: event.target.wkupassAbgegeben.value,
+		
+            	standort: event.target.standort.value,
 
-		        email: event.target.email.value,
+            	telefonnummer: event.target.telefonnummer.value,
+            	adresse: event.target.adresse.value,
+            	platz: event.target.platz.value,
+            	ort: event.target.ort.value,
+
+            	Tshirt: event.target.category.value == "Budo Kids" ? event.target.shirtwahl.value == "Ja" ? event.target.shirtSize.value : event.target.shirtwahl.value : "",
+
+            	email: event.target.email.value,
 		    
                 photo: base64String,
                 mimeType: mimeType,
     
-                consent: event.target.consent.value
+                einverständniss: event.target.consent.value
             };
     
     
