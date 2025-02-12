@@ -395,6 +395,7 @@ function setBeltSteps(altersgruppe){
 
 function selectGraduation(selected_graduation){
 
+	/*
     //enable / disable WKU Pass Abgabe feld
     if(selected_graduation.selectedIndex == 1)
     {
@@ -404,7 +405,7 @@ function selectGraduation(selected_graduation){
     {
         wkupassAbgegeben_div.classList.remove("none");
     }
-    
+    */
     var gebührFeld = document.getElementById("Gebühr");
 
     //Calculate cost
