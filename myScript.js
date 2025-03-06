@@ -51,8 +51,8 @@ document.getElementById("anmeldungsFormular").addEventListener("submit", async f
     }
 
 
-    const fileInput = event.target.photo.files[0];
-    const reader = new FileReader();
+    //const fileInput = event.target.photo.files[0];
+    //const reader = new FileReader();
 
     console.log(event.target.gürtelwahl.selectedIndex);
 
