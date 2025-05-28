@@ -1,4 +1,40 @@
 <!DOCTYPE html>
+<html>
+<body>
+<form id="uploadForm">
+  <input type="text" name="vorname" value="Max" />
+  <input type="text" name="nachname" value="Muster" />
+  <input type="file" name="photo" id="photo" />
+  <button type="submit">Senden</button>
+</form>
+
+<script>
+document.getElementById("uploadForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+  const form = event.target;
+  const formData = new FormData(form);
+  const fileInput = document.querySelector("#photo");
+  const file = fileInput.files[0];
+  if (file) {
+    formData.set("photo", file, file.name);
+  }
+
+  const response = await fetch("https://hooks.zapier.com/hooks/catch/22925597/2727n9o/", {
+    method: "POST",
+    body: formData
+  });
+
+  if (response.ok) {
+    alert("Erfolgreich gesendet");
+  } else {
+    alert("Fehler: " + await response.text());
+  }
+});
+</script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -210,3 +246,4 @@
     </main>
 </body>
 </html>
+ -->
